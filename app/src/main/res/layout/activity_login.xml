@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/title_image"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pokedex_title"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <EditText
+        android:id="@+id/login_input"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Login"
+        android:textColorHint="#eb4848"
+        android:textColor="#eb4848"/>
+
+    <EditText
+        android:id="@+id/pwd_input"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_input"
+        android:layout_centerHorizontal="true"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#eb4848"
+        android:textColor="#eb4848"/>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pwd_input"
+        android:shadowColor="#3b3bca"
+        android:background="#e7cb2e"
+        android:textColor="#ffffff"
+        android:text="login"/>
+
+    <TextView
+        android:id="@+id/signup_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/login_button"
+        android:layout_marginTop="5dp"
+        android:shadowColor="#3b3bca"
+        android:textColor="#e7cb2e"
+        android:clickable="true"
+        android:text="Sign Up"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_login"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="210dp" />
+
+
+</RelativeLayout>

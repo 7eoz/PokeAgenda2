@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".WelcomeTrainerActivity">
+
+    <item
+        android:id="@+id/add_poke_button"
+        android:icon="@drawable/add_poke"
+        android:title="Add Pokemon"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/search_poke_button"
+        android:icon="@drawable/search_poke"
+        android:title="Search Pokemon"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/list_poke_button"
+        android:icon="@drawable/list_all_poke"
+        android:title="List All Pokemon"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/leave_poke_button"
+        android:icon="@drawable/leave_poke"
+        android:title="Leave app"
+        app:showAsAction="always" />
+
+</menu>
