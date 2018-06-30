@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sandrini.pokeagenda">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -23,10 +23,10 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeTrainerActivity" />
-        <activity android:name=".CreateUserActivity" />
         <activity android:name=".EditPokeActivity" />
         <activity android:name=".PokeDetailActivity" />
-        <activity android:name=".PokeListActivity"></activity>
+        <activity android:name=".PokeListActivity" />
+        <activity android:name=".CreateTrainerActivity"></activity>
     </application>
 
 </manifest>

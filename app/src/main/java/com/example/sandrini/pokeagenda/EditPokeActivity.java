@@ -111,7 +111,7 @@ public class EditPokeActivity extends AppCompatActivity implements Response.List
     @Override
     protected void onStart() {
         super.onStart();
-        mQueue = CustomVolleyRequestQueue.getmInstance(this.getApplicationContext()).getRequestQueue();
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
         String url = "http://192.168.25.34:8081/PokedexWS/webresources/pokews/poke/poke/fetch/";
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(),
                 this, this);

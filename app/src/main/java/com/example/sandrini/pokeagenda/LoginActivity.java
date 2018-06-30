@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
+                Intent intent = new Intent(LoginActivity.this, CreateTrainerActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,9 +71,9 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 } else if (pwdInput.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Please, insert yout password", Toast.LENGTH_SHORT).show();
                 } else {
-                    String url = "http://192.168.25.6:8081/PokedexWS/webresources/pokews/poke/login/" +
+                    String url = "http://192.168.25.34:8081/PokedexWS/webresources/pokews/poke/login/" +
                             loginInput.getText().toString() + "/" + pwdInput.getText().toString();
-                    mQueue = CustomVolleyRequestQueue.getmInstance(LoginActivity.this.getApplicationContext()).getRequestQueue();
+                    mQueue = CustomVolleyRequestQueue.getInstance(LoginActivity.this.getApplicationContext()).getRequestQueue();
                     jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(),
                             LoginActivity.this, LoginActivity.this);
                     mQueue.add(jsonRequest);
@@ -98,7 +98,6 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     public void onErrorResponse(VolleyError error) {
         progressBarLogin.setVisibility(View.INVISIBLE);
         Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG).show();
-        Log.e("error", error.getMessage());
     }
 
     @Override

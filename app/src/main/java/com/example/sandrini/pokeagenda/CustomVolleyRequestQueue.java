@@ -22,7 +22,7 @@ public class CustomVolleyRequestQueue {
         mRequestQueue = getRequestQueue();
     }
 
-    public static synchronized CustomVolleyRequestQueue getmInstance(Context context) {
+    public static synchronized CustomVolleyRequestQueue getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new CustomVolleyRequestQueue(context);
         }
