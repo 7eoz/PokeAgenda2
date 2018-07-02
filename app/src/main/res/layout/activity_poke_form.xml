@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditPokeActivity">
+    tools:context=".PokeFormActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -38,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pokemon Name"
+        android:textAlignment="center"
+        android:textColor="#eb4848"
         android:textColorHint="#eb4848"/>
 
     <EditText
@@ -45,6 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pokemon Species"
+        android:textAlignment="center"
+        android:textColor="#eb4848"
         android:textColorHint="#eb4848"/>
 
     <EditText
@@ -52,14 +56,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pokemon Weight"
-        android:textColorHint="#eb4848"/>
+        android:textAlignment="center"
+        android:textColor="#eb4848"
+        android:textColorHint="#eb4848"
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:id="@+id/pokemon_height_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pokemon Height"
-        android:textColorHint="#eb4848"/>
+        android:textAlignment="center"
+        android:textColor="#eb4848"
+        android:textColorHint="#eb4848"
+        android:inputType="numberDecimal"/>
 
     <RatingBar
         android:id="@+id/pokemon_favorite_edit"

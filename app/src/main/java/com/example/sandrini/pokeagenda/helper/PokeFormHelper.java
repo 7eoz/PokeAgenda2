@@ -1,4 +1,4 @@
-package com.example.sandrini.pokeagenda;
+package com.example.sandrini.pokeagenda.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,7 +6,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
-public class PokemonHelper {
+import com.example.sandrini.pokeagenda.PokeFormActivity;
+import com.example.sandrini.pokeagenda.R;
+import com.example.sandrini.pokeagenda.model.Pokemon;
+
+public class PokeFormHelper {
     private final EditText nameField;
     private final EditText speciesField;
     private final EditText wightField;
@@ -16,7 +20,7 @@ public class PokemonHelper {
     private final ImageView imageField;
 
 
-    public PokemonHelper(EditPokeActivity edit) {
+    public PokeFormHelper(PokeFormActivity edit) {
         nameField = (EditText) edit.findViewById(R.id.pokemon_name_edit);
         speciesField = (EditText) edit.findViewById(R.id.pokemon_species_edit);
         wightField = (EditText) edit.findViewById(R.id.pokemon_weight_edit);
@@ -41,12 +45,12 @@ public class PokemonHelper {
         speciesField.setText(pokemon.getSpecies());
         wightField.setText(pokemon.getWeight());
         heightField.setText(pokemon.getHeight());
-        favField    .setProgress(pokemon.isFavorite());
-        loadImage(pokemon.getImage());
+        favField.setProgress(pokemon.isFavorite());
+        loadCameraImage(pokemon.getImage());
         this.pokemon = pokemon;
     }
 
-    public void loadImage(String imagePath) {
+    public void loadCameraImage(String imagePath) {
         if(imagePath != null){
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             Bitmap minimizedBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
@@ -54,6 +58,9 @@ public class PokemonHelper {
             imageField.setScaleType(ImageView.ScaleType.FIT_XY);
             imageField.setTag(imagePath);
         }
+    }
+
+    public  void loadGalleryImage() {
 
     }
 }

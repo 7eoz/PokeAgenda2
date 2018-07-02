@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sandrini.pokeagenda.model.Pokemon;
+import com.example.sandrini.pokeagenda.model.Trainer;
+
 public class WelcomeTrainerActivity extends AppCompatActivity {
 
 
@@ -27,7 +30,7 @@ public class WelcomeTrainerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         trainer = (Trainer) intent.getSerializableExtra("trainer");
-        welcomeMessage.setText("Bem-vindo, " + trainer.getUsername());
+        //welcomeMessage.setText("Welcome, " + trainer.getUsername());
         //favoritePokemonImage.setImageResource(pokemon.getImage());
     }
 
@@ -41,13 +44,17 @@ public class WelcomeTrainerActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_poke_button:
-                Intent intent = new Intent(this, EditPokeActivity.class);
-                startActivity(intent);
-                break;
+                Intent addPokeIntent = new Intent(WelcomeTrainerActivity.this, PokeFormActivity.class);
+                startActivity(addPokeIntent);
+                finish();
+                return true;
             case R.id.search_poke_button:
+                Intent searchPokeIntent = new Intent(WelcomeTrainerActivity.this, PokeListActivity.class);
+                startActivity(searchPokeIntent);
                 break;
             case R.id.list_poke_button:
-
+                Intent listPokeIntent = new Intent(WelcomeTrainerActivity.this, PokeListActivity.class);
+                startActivity(listPokeIntent);
                 break;
             case R.id.leave_poke_button:
                 finish();

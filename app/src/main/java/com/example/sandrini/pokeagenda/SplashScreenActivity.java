@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SplashScreen extends AppCompatActivity implements Runnable {
+public class SplashScreenActivity extends AppCompatActivity implements Runnable {
 
     private final int DELAY = 3000; //3 segundos
 
@@ -22,7 +22,7 @@ public class SplashScreen extends AppCompatActivity implements Runnable {
 
     @Override
     public void run() {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, PokeLoginActivity.class));
         finish();
     }
 }

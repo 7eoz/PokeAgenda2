@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sandrini.pokeagenda.model.Trainer;
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
@@ -27,7 +28,7 @@ public class CreateTrainerActivity extends AppCompatActivity /*implements Respon
     private EditText registerPassword;
     private Button registerTrainerButton;
     private ProgressBar registerTrainerProgressbar;
-    private static final String KEY_URL = "http://192.168.25.11:8081/PokedexWS/ws/pokews/trainer/insert";
+    private static final String KEY_URL = "http://192.168.25.34:8081/PokedexWS/ws/pokews/trainer/insert";
     private String requestBody;
     private Gson trainerGson;
     private RequestQueue requestQueue;
@@ -72,7 +73,7 @@ public class CreateTrainerActivity extends AppCompatActivity /*implements Respon
                         registerTrainerProgressbar.setVisibility(View.INVISIBLE);
                         if(response.equals("true")){
                             Toast.makeText(getApplicationContext(), "Registered successfully!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(CreateTrainerActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(CreateTrainerActivity.this, PokeLoginActivity.class);
                             startActivity(intent);
                             finish();
                         } else if(response.equals("false")){

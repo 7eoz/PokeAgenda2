@@ -1,4 +1,4 @@
-package com.example.sandrini.pokeagenda;
+package com.example.sandrini.pokeagenda.model;
 
 public class Pokemon {
 	
