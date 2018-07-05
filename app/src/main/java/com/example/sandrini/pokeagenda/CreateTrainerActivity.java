@@ -28,7 +28,7 @@ public class CreateTrainerActivity extends AppCompatActivity /*implements Respon
     private EditText registerPassword;
     private Button registerTrainerButton;
     private ProgressBar registerTrainerProgressbar;
-    private static final String KEY_URL = "http://192.168.25.34:8081/PokedexWS/ws/pokews/trainer/insert";
+    private static final String KEY_URL = "http://10.0.2.2:8081/PokedexWS/ws/pokews/trainer/insert";
     private String requestBody;
     private Gson trainerGson;
     private RequestQueue requestQueue;

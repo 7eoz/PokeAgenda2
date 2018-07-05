@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sandrini.pokeagenda.helper.PokemonImageHelper;
 import com.example.sandrini.pokeagenda.model.Pokemon;
+import com.example.sandrini.pokeagenda.model.Trainer;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -39,15 +41,13 @@ import java.io.UnsupportedEncodingException;
 
 public class PokeFormActivity extends AppCompatActivity {
 
-    // Definições de variáveis utilizadas nesta activity.
-
-    public static final String PREFERENCES = "preferences";
-    private static final String KEY_URL = "http://192.168.25.34:8081/PokedexWS/ws/pokews/poke/insert";
+    private static final String KEY_URL = "http://10.0.2.2:8081/PokedexWS/ws/pokews/poke/insert";
     private RequestQueue requestQueue;
     private String requestBody;
     private Gson gson;
     private int GALLERY_REQUEST = 123;
     private int CAMERA_REQUEST = 234;
+    private int SAVE_PHOTO_REQUEST = 345;
 
     private ImageView pokeImage;
     private Button pokeImageButton;
@@ -57,7 +57,10 @@ public class PokeFormActivity extends AppCompatActivity {
     private EditText pokeSpeciesEdit;
     private EditText pokeWeightEdit;
     private EditText pokeHeightEdit;
+    private RatingBar pokeIsFavorite;
+
     private Pokemon pokemon;
+    private Trainer trainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,11 @@ public class PokeFormActivity extends AppCompatActivity {
         pokeHeightEdit = (EditText)findViewById(R.id.pokemon_height_edit);
         pokeImage = (ImageView) findViewById(R.id.pokemon_image_edit);
         pokeImageButton = (Button) findViewById(R.id.pokemon_image_button);
+        pokeIsFavorite = (RatingBar) findViewById(R.id.pokemon_favorite_edit);
+
+        Intent intent = getIntent();
+        trainer = (Trainer) intent.getSerializableExtra("trainer");
+
         pokemon = new Pokemon();
 
         requestQueue = Volley.newRequestQueue(this);
@@ -125,12 +133,12 @@ public class PokeFormActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(PokeFormActivity.this,
                             new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
                 }
-               /* if (ActivityCompat.checkSelfPermission(PokeFormActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                if (ActivityCompat.checkSelfPermission(PokeFormActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(PokeFormActivity.this,
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, SAVE_PHOTO_REQUEST);
                 }
-                //dispatchTakePictureIntent();*/
+                //dispatchTakePictureIntent();
                 Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 pokeImagePath = getExternalFilesDir(null) + "/" + System.currentTimeMillis();
                 File imageFile = new File(pokeImagePath);
@@ -168,10 +176,8 @@ public class PokeFormActivity extends AppCompatActivity {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                     pokeImage.setImageBitmap(bitmap);
                     pokemon.setImage(PokemonImageHelper.getStringFromBitmap(bitmap));
-                    Toast.makeText(getApplicationContext(), "Imagem salva!", Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     Log.e("PokemonAddActivity",e.getLocalizedMessage());
-                    Toast.makeText(getApplicationContext(), "Ops! Ocorreu um erro!", Toast.LENGTH_SHORT).show();
                 }
             }
         } else if (requestCode == CAMERA_REQUEST) {
@@ -181,7 +187,6 @@ public class PokeFormActivity extends AppCompatActivity {
                 pokeImage.setImageBitmap(minimizedBitmap);
                 pokeImage.setScaleType(ImageView.ScaleType.FIT_XY);
                 pokeImage.setTag(pokeImagePath);
-                Toast.makeText(getApplicationContext(), "Imagem salva!", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -195,47 +200,47 @@ public class PokeFormActivity extends AppCompatActivity {
         if(pokeImage == null){
             Toast.makeText(getApplicationContext(),"Please, set a pokemon picture", Toast.LENGTH_SHORT).show();
         }else if(pokeNameEdit.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"Digite um nome do pokemon!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Please, set a pokemon name", Toast.LENGTH_SHORT).show();
         } else if(pokeSpeciesEdit.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"Digite a espécie do pokemon!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Please, set a pokemon species", Toast.LENGTH_SHORT).show();
         }else if(pokeWeightEdit.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"Digite o peso do pokemon!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Please, set a pokemon weight", Toast.LENGTH_SHORT).show();
         } else if(pokeHeightEdit.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"Digite a altura do pokemon!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Please, set a pokemon height", Toast.LENGTH_SHORT).show();
         } else {
             pokemon.setName(pokeNameEdit.getText().toString());
             pokemon.setSpecies(pokeSpeciesEdit.getText().toString());
             pokemon.setWeight(pokeWeightEdit.getText().toString());
             pokemon.setHeight(pokeHeightEdit.getText().toString());
             pokemon.setImage(pokeImagePath);
-            pokemon.setTrainerId(1);
+            pokemon.setFavorite(pokeIsFavorite.getNumStars());
+            pokemon.setTrainerId(trainer.getId());
+
+            if(pokeIsFavorite.getNumStars() == 1){
+                trainer.setFavPokemon(pokeImagePath);
+            }
 
             gson = new Gson();
             requestBody = gson.toJson(pokemon);
             StringRequest request = new StringRequest(Request.Method.POST, KEY_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    //Pokemon pokemon = gson.fromJson(response,Pokemon.class);
-                    //Intent successIntent = new Intent(PokeFormActivity.this, WelcomeTrainerActivity.class);
-                    Toast.makeText(getApplicationContext(),"result was: " + response, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(),"Pokemon registered successfully!", Toast.LENGTH_SHORT).show();
-                    //startActivity(successIntent);
-                    finish();
+                    if(response.equals("true")){
+                        Toast.makeText(getApplicationContext(),"Pokemon registered successfully!", Toast.LENGTH_SHORT).show();
+                        Intent successIntent = new Intent(PokeFormActivity.this, WelcomeTrainerActivity.class);
+                        successIntent.putExtra("trainer", trainer);
+                        startActivity(successIntent);
+                        finish();
+                    } else if(response.equals("false")){
+                        Toast.makeText(getApplicationContext(),"Pokemon already exists!", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    try{
-                        if(error.networkResponse.statusCode==409){
-                            Toast.makeText(getApplicationContext(),new String(error.networkResponse.data,"UTF-8"), Toast.LENGTH_LONG).show();
-                            Log.e("PokemonAddActivity", error.getLocalizedMessage());
-                        } else {
-                            Toast.makeText(getApplicationContext(),"Ops! Ocorreu um erro inesperado!", Toast.LENGTH_LONG).show();
-                            Log.e("PokemonAddActivity", error.getLocalizedMessage());
-                        }
-                    } catch (UnsupportedEncodingException e){
-                        Log.e("PokemonAddActivity", e.getLocalizedMessage());
-                    }
+                    Toast.makeText(getApplicationContext(),"Register failed!", Toast.LENGTH_SHORT).show();
+                    Log.e("PokemonAddActivity", error.getLocalizedMessage());
                 }
             })  {
                 @Override

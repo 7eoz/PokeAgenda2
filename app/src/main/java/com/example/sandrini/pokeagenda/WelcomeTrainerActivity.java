@@ -1,6 +1,8 @@
 package com.example.sandrini.pokeagenda;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,8 +19,6 @@ public class WelcomeTrainerActivity extends AppCompatActivity {
     TextView welcomeMessage;
     ImageView favoritePokemonImage;
     Trainer trainer = new Trainer();
-    Pokemon pokemon = new Pokemon();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,15 @@ public class WelcomeTrainerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         trainer = (Trainer) intent.getSerializableExtra("trainer");
-        //welcomeMessage.setText("Welcome, " + trainer.getUsername());
-        //favoritePokemonImage.setImageResource(pokemon.getImage());
+        welcomeMessage.setText("Welcome, " + trainer.getUsername());
+
+        /*if(!trainer.getFavPokemon().equals(null)){
+            Bitmap bitmap = BitmapFactory.decodeFile(trainer.getFavPokemon());
+            Bitmap minimizedBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+            favoritePokemonImage.setImageBitmap(minimizedBitmap);
+            favoritePokemonImage.setScaleType(ImageView.ScaleType.FIT_XY);
+            favoritePokemonImage.setTag(trainer.getFavPokemon());
+        }*/
     }
 
     @Override
@@ -45,6 +52,7 @@ public class WelcomeTrainerActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.add_poke_button:
                 Intent addPokeIntent = new Intent(WelcomeTrainerActivity.this, PokeFormActivity.class);
+                addPokeIntent.putExtra("trainer", trainer);
                 startActivity(addPokeIntent);
                 finish();
                 return true;

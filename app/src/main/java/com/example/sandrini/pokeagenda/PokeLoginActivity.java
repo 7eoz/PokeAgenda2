@@ -30,7 +30,7 @@ public class PokeLoginActivity extends AppCompatActivity implements Response.Lis
     TextView signUpButton;
     Boolean registered;
     Trainer trainer = new Trainer();
-    private static final String KEY_URL = "http://192.168.25.34:8081/PokedexWS/ws/pokews/poke/login/";
+    private static final String KEY_URL = "http://10.0.2.2:8081/PokedexWS/ws/pokews/poke/login/";
     CustomJSONObjectRequest jsonRequest;
     ProgressBar progressBarLogin;
 
@@ -111,6 +111,7 @@ public class PokeLoginActivity extends AppCompatActivity implements Response.Lis
             trainer.setUsername(trainerJson.getString("username"));
             trainer.setPassword(trainerJson.getString("password"));
             trainer.setEmail(trainerJson.getString("email"));
+            //trainer.setFavPokemon(trainerJson.getString("favorite_pokemon"));
             if(trainer != null){
                 Intent intent = new Intent(PokeLoginActivity.this, WelcomeTrainerActivity.class);
                 intent.putExtra("trainer", trainer);

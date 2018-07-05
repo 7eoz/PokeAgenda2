@@ -4,25 +4,25 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/pokemon_image"
+        android:id="@+id/poke_image"
         android:layout_width="80dp"
         android:layout_height="80dp"/>
 
     <TextView
-        android:id="@+id/pokemon_name"
+        android:id="@+id/poke_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/pokemon_image"
+        android:layout_toRightOf="@id/poke_image"
         android:layout_marginLeft="50dp"
         android:textSize="25sp"
         android:text="pokemon name"/>
 
     <TextView
-        android:id="@+id/pokemon_species"
+        android:id="@+id/poke_species"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/pokemon_image"
-        android:layout_below="@id/pokemon_name"
+        android:layout_toRightOf="@id/poke_image"
+        android:layout_below="@id/poke_name"
         android:layout_marginLeft="50dp"
         android:text="pokemon species"/>
 

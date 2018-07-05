@@ -8,6 +8,7 @@ public class Trainer implements Serializable {
 	private String username;
 	private String email;
 	private String password;
+	private String favPokemon;
 	
 	public Trainer() {
 		
@@ -53,5 +54,13 @@ public class Trainer implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getFavPokemon() {
+		return favPokemon;
+	}
+
+	public void setFavPokemon(String favPokemon) {
+		this.favPokemon = favPokemon;
 	}
 }
